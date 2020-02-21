@@ -3,7 +3,7 @@ services:
   nginx:
     restart: always
     build:
-      dockerfile: Dockerfile.dev
+      dockerfile: Dockerfile
       context: ./nginx
     ports:
       - '3050:80'
@@ -15,7 +15,7 @@ services:
     image: 'redis:latest'
   api:
     build:
-      dockerfile: Dockerfile.dev
+      dockerfile: Dockerfile
       context: ./server
     depends_on:
       - postgres
@@ -32,14 +32,14 @@ services:
       - PGPASSWORD=postgres_password
   client:
     build:
-      dockerfile: Dockerfile.dev
+      dockerfile: Dockerfile
       context: ./client
     volumes:
       - /app/node_modules
       - ./client:/app
   worker:
     build:
-      dockerfile: Dockerfile.dev
+      dockerfile: Dockerfile
       context: ./worker
     volumes:
       - /app/node_modules

@@ -3,16 +3,16 @@ services:
   - docker
 
 before_install:
-  - docker build -t tomtom92/react-test -f ./client/Dockerfile.dev ./client/
+  - docker build -t tomtom92/react-test2 -f ./client/Dockerfile.dev ./client/
 
 script:
-  - docker run tomtom92/react-test npm run test -- --coverage
+  - docker run -e CI=true tomtom92/react-test2 npm run test -- --coverage
 
 after_success:
   - docker build -t tomtom92/multi-client2 ./client
   - docker build -t tomtom92/multi-nginx2 ./nginx
   - docker build -t tomtom92/multi-server2 ./server
-  - docker build -t tomtom92/multi-worker ./worker
+  - docker build -t tomtom92/multi-worker2 ./worker
   # log in to docker CLI
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
   # push to docker hub
