@@ -3,7 +3,7 @@ services:
   - docker
 
 before_install:
-  - docker build -t tomtom92/react-test2 -f ./client/Dockerfile.dev ./client/
+  - docker build -t tomtom92/react-test2 -f ./client/Dockerfile ./client/
 
 script:
   - docker run -e CI=true tomtom92/react-test2 npm run test -- --coverage
