@@ -4,7 +4,33 @@
 		{
 			"name": "client",
 			"image": "tomtom92/multi-client2",
-			"hostname": "client"
+			"hostname": "client",
+			"essential": false
+		},
+		{
+			"name": "server",
+			"image": "tomtom92/multi-server2",
+			"hostname": "api",
+			"essential": false
+		},
+		{
+			"name": "worker",
+			"image": "tomtom92/multi-worker2",
+			"hostname": "worker",
+			"essential": false
+		},
+		{
+			"name": "nginx",
+			"image": "tomtom92/multi-nginx2",
+			"hostname": "nginx",
+			"essential": true,
+			"portMappings": [
+				{
+					"hostPort": 80,
+					"containerPort": 80
+				}
+			],
+			"links": [ "client", "server" ]
 		}
 	]
 }
